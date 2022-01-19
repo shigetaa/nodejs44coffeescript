@@ -146,9 +146,72 @@ coffee str-hdoc.coffee
 
 ## 真と偽
 
+JavaScript では真偽値として、`true` と `false` を利用できました。
+CoffeeScript では、これに加えて `on` と `off` 、`yes` と `no` を指定することができます。
+意味としては、`true` と `false` と同じなのですが、文脈に応じて使い分けるとプログラムが読みやすくなるでしょう。
+
 ## 配列
 
+配列やオブジェクトを指定する時、JavaScript と同じく、配列を `[]`で、オブジェクトを `{}` で表現出来ます。
+ただし、配列の区切り文字として、カンマ「 `,` 」だけでなく改行も利用出来ます。
+また、最後の要素がカンマで終わってもエラーにならない様になってます。
+```coffee
+fruits = [
+  "Orange"
+  "Banana"
+  "Apple"
+]
+
+info = {
+  id: "a1234"
+  price: 300
+  origin: "Osaka"
+};
+
+oslist = ["Windows", "OS X", "Linux",]
+```
+YAMLと同じように、インデントで階層を付けると、入れ子のオブジェクトを表現することができます。
+[YAMLとは](https://github.com/shigetaa/nodejs43data#yaml%E5%BD%A2%E5%BC%8F%E3%81%A8%E3%81%AF)
+```coffee
+fruits = 
+  Orange: 
+    price: 200
+    origin: "Osaka"
+  Banana:
+    price: 240
+    origin: "Kobe"
+  Apple:
+    price: 400
+    origin: "Kyoto"
+
+console.log fruits
+```
+上記のプログラムを実行すると、以下の様に表示されます。
+```bash
+coffee like-yaml.coffee
+```
+```javascript
+{
+  Orange: { price: 200, origin: 'Osaka' },
+  Banana: { price: 240, origin: 'Kobe' },
+  Apple: { price: 400, origin: 'Kyoto' }
+}
+```
+
 ## 演算子
+
+演算子は、JavaScript とほぼ同じですが、以下のような演算子も用意されています。
+| CoffeeScript | JavaScript | 利用例        |
+| :----------- | :--------- | :------------ |
+| is           | ===        | a is "hoge"   |
+| isnt         | !==        | a isnt "hoge" |
+| not          | !          | not true      |
+| and          | &&         | a and b       |
+| or           | \|\|       | a or b        |
+
+その他に気を付けなければならないのが、CoffeeScript で比較演算子「`==`」は、JavaScript の「`===`」に変換されるという点です。
+JavaScript で「`===`」は厳密な比較を表し、変数の値だけではなく型が一致してないと false が返ります。
+
 ### 範囲の比較を行う
 ### 変数の存在をチェックする
 ### 連続する数値の表現、範囲演算子
