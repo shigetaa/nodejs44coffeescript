@@ -408,7 +408,7 @@ coffee for-key2id-in.coffee
 ```
 
 次に、`for .. of`構文を`for-of.coffee`ファイルとして作成してみましょう。
-上記のプログラムを実行すると、以下の様に表示されます。
+
 ```coffee
 mail_info = {
 	subject: "こんにちは"
@@ -419,6 +419,7 @@ mail_info = {
 for key, value of mail_info
   console.log "#{key} : #{value}"
 ```
+上記のプログラムを実行すると、以下の様に表示されます。
 ```bash
 coffee for-of.coffee
 ```
@@ -428,8 +429,57 @@ from : shigeta@xxx.xxx
 body : お久しぶりです。
 ```
 
-
 ## 関数の記述
+
+関数を記述するには、次の書式で書きます。
+ちなみに、`return`を記述する必要がなく、最後の式が戻り値となります。
+> ( 引数１, 引数２, ...) -> 式
+
+では、簡単に掛け算を行う関数を定義してみます。
+`func1.coffee`と言う名前のファイルを作成して以下の様に記述してみます。
+```coffee
+multiply = (a, b) ->
+  a * b
+
+console.log multiply 2, 3
+```
+上記のプログラムを実行すると、以下の様に表示されます。
+```bash
+coffee func1.coffee
+```
+```bash
+6
+```
+
+次に、二乗を計算するx2と言う関数と、四乗を計算するx4と言う関数を定義してみます。
+`func2.coffee`と言う名前のファイルを作成して以下の様に記述してみます。
+```coffee
+x2 = (n) -> n * n
+x4 = (n) -> n * n * n * n
+
+console.log(x2(3),x4(2))
+```
+上記のプログラムを実行すると、以下の様に表示されます。
+```bash
+coffee func2.coffee
+```
+```bash
+9 16
+```
+
+引数が無い、関数を記述する場合には`(引数)`の部分を省略することができます。
+しかし関数を呼び出す際には、関数名の後に`()`が必要になります。
+また、戻り値が不要な場合は、`return`文を記述する必要があります。
+```coffee
+# 引数の無い関数
+func = ->
+  console.log "hello"
+  return
+
+# 引数の無い関数を呼び出す
+func()
+```
+
 ### 引数のデフォルト値
 ### 可変長引数
 ### 無名関数
