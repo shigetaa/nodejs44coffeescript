@@ -213,16 +213,99 @@ coffee like-yaml.coffee
 JavaScript で「`===`」は厳密な比較を表し、変数の値だけではなく型が一致してないと false が返ります。
 
 ### 範囲の比較を行う
+
+JavaScript では「 `10 <= x && x <=30` 」のように記述することがあります。
+これは、10以上30以下を表す式です。
+CoffeeScript では「 `10 <= x <= 30` 」と書くことができます。
+両者を比較してみると、CoffeeScript の方が直感的に記述出来る事がわかります。
+
 ### 変数の存在をチェックする
+
+変数が未定義かどうか調べるのに「 `?` 」演算子を利用することが出来ます。
+これは、変数が未定義で、かつ、null でないかどうかを調べる事ができます。
+```coffee
+obj = { name: "Shigeta", age: 30}
+console.log obj.name?   # 結果 -> true
+console.log obj.weight? # 結果 -> false
+```
+この「 `?` 」演算子を利用することで、変数が未定義の場合にデフォルト値を指定する事ができます。
+```coffee
+value = sval ? 100
+```
+CoffeeScript では 「 `?` 」が**存在演算子**となる為、JavaScript の参考演算子は利用できません。
+
 ### 連続する数値の表現、範囲演算子
 
+範囲演算子「 1`..`10 」が利用できるので、数値配列を手軽に生成出来ます。
+例えば、１から１０の値を生成する場合には、以下の様に記述できます。
+```coffee
+range = [1..10]
+```
+また、範囲演算子には「 1`...`10 」(ドットが3つ)の物もあり、これを使う場合は、末尾の値が除かれます。
+例えば、「 1`...`10 」と書いた場合は、1から9までの値をしていした「 1`..`9 」と等しくなります。
+
 ## 制御構文
+
+CoffeeScript の制御構文を1つずつ確認していきます。
+CoffeeScript の制御構文ブロックはインデントで表現します。
+
 ### if..else..
+
+インデントを使うので、条件分岐はシンプルに記述できます。
+以下の様に`if`構文を連続でつなぐことも出来ます。
+```coffee
+age = 18
+if age < 20
+  console.log "少年"
+else if age < 30
+  console.log "青年"
+else if age < 50
+  console.log "中年"
+else
+  console.log "老人"
+```
+そして、**後置形式**の`if`も指定出来ます。
+この場合は、条件式が真の時のみ、前方の式が実行されることになります。
+```coffee
+x = 50
+console.log "30" if x is 30
+console.log "50" if x is 50
+console.log "70" if x is 70
+```
+上記の、プログラウ実行すると、`x`が50 なので、`if x is 50`を指定した式が実行されます
+
 ### if..then..else
+また、一行で`if`構文を書くときには、`if` .. `then` .. `else` ..を使うことができ、JavaScript の三項演算子の様に使うことができます。
+```coffee
+age = 12
+price = if age > 12 then 500 else 150
+console.log "#{age}才は、#{price}円です"
+```
+上記のプログラムを実行すると、以下の様に表示されます。
+
+```bash
+coffee if.coffee
+```
+```bash
+12才は、150円です
+```
+
 ### unless
+
+
+
 ### switch..when..else
+
+
+
 ### while / until
+
+
+
 ### for..in / for..of
+
+
+
 
 ## 関数の記述
 ### 引数のデフォルト値
