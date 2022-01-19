@@ -330,11 +330,103 @@ start 3-5
 
 ### while / until
 
+条件式が `true` の間、繰り返しブロックを実行するのが、`while` 構文です。
+これに対して条件式が `false` の間繰り返すのが、`until` 構文です。
 
+```coffee
+i = 1
+while i <=5
+  console.log i
+  i++
 
+console.log "---"
+
+until i < 0
+  console.log i
+  i--
+```
+上記のプログラムを実行すると、以下の様に表示されます。
+
+```bash
+coffee while.coffee
+```
+```bash
+1
+2
+3
+4
+5
+---
+6
+5
+4
+3
+2
+1
+0
+```
 ### for..in / for..of
 
+配列から順に値を取り出して特定の処理を繰り返すのが、`for .. in`構文です。
+そして、オブジェクトから順に値を取り出して処理を繰り返すのが、`for .. or`構文です。
 
+まずは、`for .. in`構文を`for-in.coffee`ファイルとして作成してみましょう。
+```coffee
+fruits = ["Tomato", "Banana", "Apple", "Orange"]
+for name in fruits
+  console.log "I like #{name}."
+```
+上記のプログラムを実行すると、以下の様に表示されます。
+
+```bash
+coffee for-in.coffee
+```
+```bash
+I like Tomato.
+I like Banana.
+I like Apple.
+I like Orange.
+```
+
+JavaScript の `for .. in`構文では、反復子の変数に要素番号が代入されるだけでしたが、CoffeeScript では、要素そのものが代入されるので便利です。
+要素番号事態が必要な場合には、「 `for value, index in 配列` 」のような書式で記述できます。
+```coffee
+fruits = ["Tomato", "Banana", "Apple", "Orange"]
+for name,index in fruits
+  console.log "#{index} : #{name}."
+```
+上記のプログラムを実行すると、以下の様に表示されます。
+
+```bash
+coffee for-key2id-in.coffee
+```
+```bash
+0 : Tomato.
+1 : Banana.
+2 : Apple.
+3 : Orange.
+```
+
+次に、`for .. of`構文を`for-of.coffee`ファイルとして作成してみましょう。
+上記のプログラムを実行すると、以下の様に表示されます。
+```coffee
+mail_info = {
+	subject: "こんにちは"
+	from: "shigeta@xxx.xxx"
+	body: "お久しぶりです。"
+}
+
+for key, value of mail_info
+  console.log "#{key} : #{value}"
+```
+```bash
+coffee for-of.coffee
+```
+```bash
+subject : こんにちは
+from : shigeta@xxx.xxx
+body : お久しぶりです。
+```
 
 
 ## 関数の記述
