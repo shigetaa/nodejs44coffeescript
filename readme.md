@@ -292,11 +292,41 @@ coffee if.coffee
 
 ### unless
 
-
+`if` 構文は、条件式が `true` の時に続くブロックを実行しましたが、
+`unless` 構文は条件式が `false` の場合に続くブロックを実行します。
+```coffee
+v = 20
+unless v is 15
+  console.log "#{v} != 15"
+```
 
 ### switch..when..else
 
+式の値に応じて処理を分岐するのが、`switch`構文です。
+JavaScript の `switch`とは異なり、`case` 句の代わりに `when` 句を使い、
+`default` 句の代わりに `else` 句を利用します。
+`when` 句には、カンマで区切って複数の値を指定できます。
+条件を抜けるための `break` は不要で、次の when が来たらそこで処理を自動的に抜けます。
+```coffee
+start = 2
+switch start
+  when 1
+    console.log "start 1"
+  when 2
+    console.log "start 2"
+  when 3,4,5
+    console.log "start 3-5"
+  else
+    console.log "start else"
+```
+上記のプログラムを実行すると、以下の様に表示されます。
 
+```bash
+coffee switch.coffee
+```
+```bash
+start 3-5
+```
 
 ### while / until
 
