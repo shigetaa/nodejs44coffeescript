@@ -558,7 +558,117 @@ coffee func5.coffee
 ```
 
 ## オブジェクト指向
+JavaScriptにもオブジェクト指向はあるのですが、プロトタイプベースのオブジェクト指向であり、わかりにくいものでした。
+CoffeeScriptでは、一般的なオブジェクト指向言語の様にして、クラスを定義する事ができます。
+
 ### クラス定義
+
+クラス定義の例を見てみましょう。
+以下のプログラムでは、Aminal クラスを定義し、インスタンスを生成してみます。
+クラスのメソッド定義の中でプロパティを参照したい場合には「@変数名」の様に記述します。
+```coffee
+# Animal クラスの定義
+class Animal
+  # プロパティの定義
+  atype: "Animal"
+
+  # コンストラクタを定義
+  constructor: (@name) ->
+    # name プロパティは自動的に定義される
+
+  # メソッドを定義
+  print: ->
+    console.log "名前は#{@name}、種類は#{@atype}です。"
+
+# インスタンスの生成
+taro = new Animal "Shigeta"
+taro.print()
+```
+上記のプログラムを実行すると、以下の様に表示されます。
+```bash
+coffee class.coffee
+```
+```bash
+名前はShigeta、種類はAnimalです。
+```
+
 ### 継承
+
+では、Animal クラスを継承して Dog クラス Cat クラスを作成してみましょう
+```coffee
+# Animal クラスの定義
+class Animal
+  # プロパティの定義
+  atype: "Animal"
+
+  # コンストラクタを定義
+  constructor: (@name) ->
+    # name プロパティは自動的に定義される
+
+  # メソッドを定義
+  print: ->
+    console.log "名前は#{@name}、種類は#{@atype}です。"
+
+class Dog extends Animal
+  atype: "Dog"
+  print: ->
+    console.log "わんわん"
+    super()
+
+class Cat extends Animal
+  atype: "Cat"
+  print: ->
+    console.log "にゃーにゃー"
+    super()
+
+# インスタンスの生成
+taro = new Dog "Taro"
+taro.print()
+
+mike = new Cat "Mike"
+mike.print()
+```
+上記のプログラムを実行すると、以下の様に表示されます。
+```bash
+coffee class2.coffee
+```
+```bash
+わんわん
+名前はTaro、種類はDogです。
+にゃーにゃー
+名前はMike、種類はCatです。
+```
+
 ### 静的メンバー
+
+静的なクラスメソッドやプロパティを定義するには「 `@プロパティ` 」の様に、名前の前に「 `@` 」を記述します。
+```coffee
+class Calc
+  # 静的プロパティ
+  @pi: 3.1415
+  # 静的メソッド
+  @mul: (a, b) -> a * b
+  @div: (a, b) -> a / b
+  @mod: (a, b) -> a % b
+
+console.log Calc.pi
+console.log Calc.mul 2,3
+```
+上記のプログラムを実行すると、以下の様に表示されます。
+```bash
+coffee class3.coffee
+```
+```bash
+3.1415
+6
+```
+
 ### メンバーを動的に追加する
+
+CoffeeScript では、既存クラスへの動的メンバーを追加することが出来ます。
+この場合「 `クラス名::メンバー=値` 」の様にして追加出来ます。
+```coffee
+Animal::food = "Pet food"
+```
+ちなみに、CoffeeScript の 「 `@` 」は自分自身を表すキーワードとなっており
+JavaScript の 「 `this` 」と同じ意味です。
