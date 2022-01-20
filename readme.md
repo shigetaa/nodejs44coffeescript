@@ -509,7 +509,53 @@ coffee func3.coffee
 ```
 
 ### 可変長引数
+
+関数定義の際に、引数の末尾に「 `...` 」と記述すると、可変長引数を指定出来ます。
+可変長引数は配列の形で取得できます。
+```coffee
+sum = (args...) ->
+  total = 0
+  for arg in args
+    total += arg
+  total
+
+console.log sum 1,2,3
+console.log sum 3,4,5
+```
+上記のプログラムを実行すると、以下の様に表示されます。
+```bash
+coffee func4.coffee
+```
+```bash
+6
+12
+```
+
 ### 無名関数
+
+無名関数も同じように「 `(引数)->` 」の書式で記述する事ができます。
+以下は、定期的にコールバック関数を実行する setinterval()関数の利用例となっています。
+一秒ごとに無名関数の形で指定したコールバック関数が実行されます。
+```coffee
+counter = 5
+setInterval ->
+  console.log counter
+  counter--
+  if counter is 0
+    process.exit()
+,1000
+```
+上記のプログラムを実行すると、以下の様に表示されます。
+```bash
+coffee func5.coffee
+```
+```bash
+5
+4
+3
+2
+1
+```
 
 ## オブジェクト指向
 ### クラス定義
